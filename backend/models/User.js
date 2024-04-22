@@ -1,11 +1,11 @@
 // User.js dosyası
 const mongoose = require('mongoose');
 
-const usersSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     email: String,
     password: String,
 });
 
-const Users = mongoose.model('Users', usersSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = Users;
+module.exports = User;
