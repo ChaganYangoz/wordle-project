@@ -8,13 +8,14 @@ const app = express();
 mongoose.set('strictQuery', false);
 const key =
     'mongodb+srv://theozkan1905:twofun1905@cluster0.np0ed2c.mongodb.net/yazlab2?retryWrites=true&w=majority';
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 let usersRouter = require('./routes/UserRouter');
 app.use('/user', usersRouter);
+
 
 app.use(function (req, res, next) {
     next(createError(404, 'Not Found'));
