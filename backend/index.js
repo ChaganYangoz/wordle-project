@@ -1,18 +1,17 @@
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
+const turkce = require("turkce");
 const createError = require('http-errors');
 
 const app = express();
 
 mongoose.set('strictQuery', false);
 const key =
-        'mongodb+srv://theozkan1905:Twofun1905@cluster0.iie94iy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+        'mongodb+srv://theozkan1905:twofun1905@cluster0.iie94iy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 
 let usersRouter = require('./routes/UserRouter');
@@ -45,6 +44,15 @@ async function startServer() {
         console.error('MongoDB bağlantısı sırasında bir hata oluştu:', error);
     }
 }
+
+(async () => {
+  try {
+    const sonuc = await turkce("maljk");
+    console.log(sonuc);
+  } catch (e) {
+    console.error(e);
+  }
+})();
 
 startServer();
 
