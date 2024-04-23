@@ -4,7 +4,7 @@ import { colors } from "../constants";
 import { Alert } from "react-native";
 import { useEffect } from "react";
 import io from "socket.io-client";
-const socket = io("http://192.168.1.40:8000");
+const socket = io("http://192.168.1.25:8000");
 const KelimeSabitsiz = () => {
   //http://192.168.1.40:8000
   useEffect(() => {
@@ -32,7 +32,7 @@ const KelimeSabitsiz = () => {
     const playerCount = 0;
     try {
       const response = await fetch(
-        "http://192.168.1.40:3000/add-player-to-room",
+        "http://192.168.1.25:3000/add-player-to-room",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

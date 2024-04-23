@@ -2,22 +2,15 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const turkce = require("turkce");
-<<<<<<< HEAD
-const createError = require('http-errors');
-const GameManager = require('./gameManager');
-const WebSocket = require('ws');
-const http = require('http');
-
-=======
 const createError = require("http-errors");
 const GameManager = require("./gameManager");
 const http = require("http");
 const socketIO = require("socket.io");
->>>>>>> 1315f840bdff7bf3ad25b3ed5c1b95bcb5fd0cca
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO({ port: 8000 });
+const io = socketIO(server);
+
 mongoose.set("strictQuery", false);
 const key =
   "mongodb+srv://theozkan1905:twofun1905@cluster0.iie94iy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";

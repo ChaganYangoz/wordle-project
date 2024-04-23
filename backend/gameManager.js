@@ -25,7 +25,6 @@ class GameManager {
     console.log("Oyuncu eklendi");
   }
 
-  // Tahmin kontrolü ve diğer metotlar...
 }
 
 module.exports = GameManager;

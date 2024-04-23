@@ -20,7 +20,7 @@ const Register = ({ navigation }) => {
   const handleButtonPress = async () => {
     if (email && password) {
       try {
-        const response = await fetch("http://192.168.1.40:3000/user/register", {
+        const response = await fetch("http://192.168.1.25:3000/user/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
