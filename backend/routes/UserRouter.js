@@ -5,8 +5,7 @@ var router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
-    const {email, password} =
-      req.body;
+    const { email, password } = req.body;
     const active = req.body.active ?? true;
 
     // E-posta adresi zaten varsa hata döndür
