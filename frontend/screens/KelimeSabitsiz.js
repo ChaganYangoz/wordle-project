@@ -3,27 +3,28 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { colors } from "../constants";
 import { Alert } from "react-native";
 import { useEffect } from "react";
-import { WebSocket } from "react-native";
-
+import io from "socket.io-client";
+const socket = io("http://192.168.1.40:8000");
 const KelimeSabitsiz = () => {
-  //http://192.168.1.40:3000
+  //http://192.168.1.40:8000
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.1.40:8000");
-
-    ws.on("open", () => {
-      console.log("WebSocket connection opened");
+    // Bağlantı kurulduğunda çalışacak kod
+    socket.on("connect", () => {
+      console.log("Sunucuya bağlandı");
     });
 
-    ws.on("message", (message) => {
-      console.log(`Received message: ${message}`);
+    // Sunucudan bir mesaj alındığında çalışacak kod
+    socket.on("mesaj", (data) => {
+      console.log("Sunucudan mesaj alındı:", data);
     });
 
-    ws.on("close", () => {
-      console.log("WebSocket connection closed");
+    // Bağlantı kesildiğinde çalışacak kod
+    socket.on("disconnect", () => {
+      console.log("Sunucudan ayrıldı");
     });
 
     return () => {
-      ws.close();
+      socket.disconnect();
     };
   }, []);
 

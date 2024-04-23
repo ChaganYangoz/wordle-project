@@ -4,13 +4,12 @@ const mongoose = require("mongoose");
 const turkce = require("turkce");
 const createError = require("http-errors");
 const GameManager = require("./gameManager");
-const WebSocket = require("ws");
 const http = require("http");
+const socketIO = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ port: 8000 });
-
+const io = socketIO({ port: 8000 });
 mongoose.set("strictQuery", false);
 const key =
   "mongodb+srv://theozkan1905:twofun1905@cluster0.iie94iy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -18,24 +17,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-wss.on("connection", (ws) => {
-  console.log("Yeni bir bağlantı kuruldu.");
+io.on("connection", (socket) => {
+  console.log("Bir kullanıcı bağlandı");
 
-  ws.on("message", (message) => {
-    console.log(`Alınan mesaj: ${message}`);
-
-    // Alınan mesajı diğer bağlı istemcilere iletmek için
-    wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
-    });
-  });
-  ws.on("close", () => {
-    console.log("Bir bağlantı kapandı.");
+  socket.on("disconnect", () => {
+    console.log("Bir kullanıcı ayrıldı");
   });
 });
 
+server.listen(8000, () => {
+  console.log("Sunucu çalışıyor. Port: 8000");
+});
 let usersRouter = require("./routes/UserRouter");
 app.use("/user", usersRouter);
 
